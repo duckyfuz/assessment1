@@ -1,27 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import styles from "./page.module.css";
+import { UserDetail } from "./components/UserDetail/UserDetail";
 
-const fetchUserList = () => {
-  (async function fetchUsers() {
-    try {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/users"
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const users = await response.json();
-      console.log(users);
-    } catch (error) {
-      console.error("Error fetching users:", error);
-    }
-  })();
-};
+import { User } from "./helpers/types";
+import styles from "./page.module.css";
 
 export default function Home() {
   const [authorList, setAuthorList] = useState<string[]>([]);
+  const [userList, setUserList] = useState<User[]>([]);
 
   function handleSubmitAuthor(formData: FormData) {
     const newAuthor = formData.get("author");
@@ -35,6 +22,23 @@ export default function Home() {
     }
   }
 
+  const fetchUserList = () => {
+    (async function fetchUsers() {
+      try {
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/users"
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const users = await response.json();
+        setUserList(users);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    })();
+  };
+
   return (
     <div className={styles.main}>
       <h1 className={styles.title}>GCC Technical Assessment</h1>
@@ -47,6 +51,14 @@ export default function Home() {
         <div className={styles.authorList}>
           {authorList.map((author) => (
             <p key={author}>{author}</p>
+          ))}
+        </div>
+      </div>
+      <div className={styles.userContainer}>
+        <button onClick={fetchUserList}>Fetch from API</button>
+        <div className={styles.userList}>
+          {userList.map((user) => (
+            <UserDetail key={user.id} user={user} />
           ))}
         </div>
       </div>
