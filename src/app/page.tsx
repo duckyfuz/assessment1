@@ -20,9 +20,20 @@ const fetchUserList = () => {
 };
 
 export default function Home() {
+  function handleSubmitAuthor(formData: FormData) {
+    console.log(formData.get("author"));
+  }
+
   return (
     <div className={styles.main}>
       <h1 className={styles.title}>GCC Technical Assessment</h1>
+      <div className={styles.authorContainer}>
+        <form action={handleSubmitAuthor}>
+          <label htmlFor="author">Author Name:</label>
+          <input type="text" id="author" name="author" required />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </div>
   );
 }
