@@ -13,4 +13,12 @@
 .authorContainer {
   max-width: 800px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.authorList p {
+  margin-block-start: 0px;
+  margin-block-end: 0px;
 }

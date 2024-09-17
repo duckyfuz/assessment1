@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState } from "react";
 import styles from "./page.module.css";
 
 const fetchUserList = () => {
@@ -20,8 +21,18 @@ const fetchUserList = () => {
 };
 
 export default function Home() {
+  const [authorList, setAuthorList] = useState<string[]>([]);
+
   function handleSubmitAuthor(formData: FormData) {
-    console.log(formData.get("author"));
+    const newAuthor = formData.get("author");
+    if (typeof newAuthor === "string" && newAuthor !== null) {
+      setAuthorList((prevList) => {
+        if (!prevList.includes(newAuthor)) {
+          return [...prevList, newAuthor];
+        }
+        return prevList;
+      });
+    }
   }
 
   return (
@@ -33,6 +44,11 @@ export default function Home() {
           <input type="text" id="author" name="author" required />
           <button type="submit">Submit</button>
         </form>
+        <div className={styles.authorList}>
+          {authorList.map((author) => (
+            <p key={author}>{author}</p>
+          ))}
+        </div>
       </div>
     </div>
   );
