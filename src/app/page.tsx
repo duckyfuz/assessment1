@@ -10,9 +10,9 @@ export default function Home() {
   const [authorList, setAuthorList] = useState<string[]>([]);
   const [userList, setUserList] = useState<User[]>([]);
 
-  function handleSubmitAuthor(even: FormEvent<HTMLFormElement>) {
+  function handleSubmitAuthor(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const formData = new FormData(event.target);
+    const formData = new FormData(event.currentTarget);
     const newAuthor = formData.get("author");
 
     if (typeof newAuthor === "string" && newAuthor !== null) {
