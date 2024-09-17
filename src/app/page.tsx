@@ -47,9 +47,11 @@ export default function Home() {
       <h1 className={styles.title}>GCC Technical Assessment</h1>
       <div className={styles.authorContainer}>
         <form onSubmit={handleSubmitAuthor}>
-          <label htmlFor="author">Author Name:</label>
-          <input type="text" id="author" name="author" required />
-          <button type="submit">Submit</button>
+          <label htmlFor="author">Author Name: (Must be Unique)</label>
+          <div>
+            <input type="text" id="author" name="author" required />
+            <button type="submit">Submit</button>
+          </div>
         </form>
         <div className={styles.authorList}>
           {authorList.map((author) => (

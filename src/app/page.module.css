@@ -19,7 +19,8 @@
 }
 
 .authorContainer form {
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .authorList p {
