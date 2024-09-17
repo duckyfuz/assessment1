@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { UserDetail } from "./components/UserDetail/UserDetail";
 
 import { User } from "./helpers/types";
@@ -10,8 +10,11 @@ export default function Home() {
   const [authorList, setAuthorList] = useState<string[]>([]);
   const [userList, setUserList] = useState<User[]>([]);
 
-  function handleSubmitAuthor(formData: FormData) {
+  function handleSubmitAuthor(even: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
     const newAuthor = formData.get("author");
+
     if (typeof newAuthor === "string" && newAuthor !== null) {
       setAuthorList((prevList) => {
         if (!prevList.includes(newAuthor)) {
@@ -43,7 +46,7 @@ export default function Home() {
     <div className={styles.main}>
       <h1 className={styles.title}>GCC Technical Assessment</h1>
       <div className={styles.authorContainer}>
-        <form action={handleSubmitAuthor}>
+        <form onSubmit={handleSubmitAuthor}>
           <label htmlFor="author">Author Name:</label>
           <input type="text" id="author" name="author" required />
           <button type="submit">Submit</button>

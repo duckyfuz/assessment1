@@ -18,6 +18,10 @@
   gap: 10px;
 }
 
+.authorContainer form {
+  gap: 10px;
+}
+
 .authorList p {
   margin-block-start: 0px;
   margin-block-end: 0px;
