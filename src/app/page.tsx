@@ -20,5 +20,9 @@ const fetchUserList = () => {
 };
 
 export default function Home() {
-  return <div>Form goes here</div>;
+  return (
+    <div className={styles.main}>
+      <h1 className={styles.title}>GCC Technical Assessment</h1>
+    </div>
+  );
 }
